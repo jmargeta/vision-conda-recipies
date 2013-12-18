@@ -1,0 +1,36 @@
+package:
+  name: opencv
+  version: 2.4.7
+
+source:
+  fn: opencv-2.4.7.zip
+  url: https://github.com/Itseez/opencv/archive/2.4.7.zip
+  md5: 6efdaa9d3f09cd3577931bf8614fdc17
+
+build:
+  # If this is a new build for the same version, increment the build
+  # number. If you do not include this key, it defaults to 0.
+  # number: 1
+
+requirements:
+  build:
+    - python
+    - setuptools
+    - numpy
+
+  run:
+    - python
+    - numpy
+
+test:
+  # Python imports
+  imports:
+    - cv2
+
+about:
+  home: http://opencv.org/
+  license: BSD License
+
+# See
+# http://docs.continuum.io/conda/build.html for
+# more information about meta.yaml
