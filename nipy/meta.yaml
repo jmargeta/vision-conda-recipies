@@ -1,0 +1,51 @@
+package:
+  name: nipy
+  version: 0.3.0
+
+source:
+  fn: nipy-0.3.0.zip
+  url: https://github.com/nipy/nipy/archive/0.3.0.zip
+  md5: 1517cc2ae029c692b326fe60bcb8f397
+
+build:
+  # If this is a new build for the same version, increment the build
+  # number. If you do not include this key, it defaults to 0.
+  # number: 1
+
+requirements:
+  build:
+    - python
+    - distribute
+    - numpy
+    - scipy
+    - sympy
+    - cython
+    - nibabel
+
+  run:
+    - python
+    - numpy
+    - scipy
+    - sympy
+    - nibabel
+    - ipython
+    - matplotlib
+    - mayavi
+
+
+test:
+  # Python imports
+  imports:
+    - nipy
+    - nipy.algorithms
+    - nipy.core
+    - nipy.interfaces
+    - nipy.io
+    - nipy.labs
+    - nipy.modalities
+
+
+about:
+  home: http://nipy.org/nipy
+  license: BSD Software License
+
