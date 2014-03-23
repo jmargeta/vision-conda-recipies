@@ -1,0 +1,33 @@
+package:
+  name: mahotas
+  version: 1.1.0
+
+source:
+  git_url: https://github.com/luispedro/mahotas.git
+  git_tag: release-1.1.0
+
+build:
+  # If this is a new build for the same version, increment the build
+  # number. If you do not include this key, it defaults to 0.
+  # number: 1
+
+requirements:
+  build:
+    - python
+    - setuptools
+    - numpy
+
+  run:
+    - python
+    - numpy
+
+
+test:
+  # Python imports
+  imports:
+    - mahotas
+
+about:
+  home: http://luispedro.org/software/mahotas
+  license: BSD Software License
+
