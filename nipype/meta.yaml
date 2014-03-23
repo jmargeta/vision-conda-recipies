@@ -1,0 +1,46 @@
+package:
+  name: nipype
+  version: 0.9.2
+
+source:
+  git_url: https://github.com/nipy/nipype.git
+  git_tag: 0.9.2
+
+  patches:
+    - patch_provenance_0_9_2.patch
+    - patch_utils_0_9_2.patch
+ 
+build:
+  # If this is a new build for the same version, increment the build
+  # number. If you do not include this key, it defaults to 0.
+  # number: 1
+
+requirements:
+  build:
+    - python
+    - numpy
+    - scipy
+    - nibabel
+    - networkx
+    - traits
+
+  run:
+    - python
+    - numpy
+    - scipy
+    - nibabel
+    - networkx
+    - traits
+    - dateutil
+    - pywin32  # [win]
+    - nose
+
+test:
+  # Python imports
+  imports:
+    - nipype
+
+about:
+  home: http://nipy.org/nipype
+  license: BSD Software License
+
