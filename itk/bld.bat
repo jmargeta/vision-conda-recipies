@@ -1,3 +1,9 @@
+rem PyBuffer submodule to allow conversion of images to numpy arrays
+git clone git://github.com/jmargeta/itkPyBuffer.git ./Modules/External/itkPyBuffer
+
+rem NUMPY include dirs
+for /f %%i in ('python -c "import numpy; import os; print(os.path.join(numpy.get_include(), 'numpy'))"') do set NP_INCLUDE=%%i
+
 mkdir build
 cd build
 
@@ -9,15 +15,33 @@ cmake ^
     -DPYTHON_INCLUDE_DIR:PATH="%PREFIX%/include" ^
     -DPYTHON_LIBRARY:FILEPATH="%PREFIX%/libs/python%PY_VER_NO_DOT%.lib" ^
     -DPY_SITE_PACKAGES_PATH:PATH="%SP_DIR%" ^
-    -DITK_WRAP_PYTHON:BOOL=ON ^
+	-DPYTHON_NUMARRAY_INCLUDE_DIR:PATH="%NP_INCLUDE%" ^
     -DBUILD_EXAMPLES:BOOL=OFF ^
 	-DBUILD_TESTING:BOOL=OFF ^
-	-DMODULE_ITKReview:BOOL=ON ^
+    -DITK_WRAP_PYTHON:BOOL=ON ^
+	-DITK_BUILD_DEFAULT_MODULES:BOOL=ON ^
+	-DModule_ITKPyBuffer:BOOL=ON ^
+	-DModule_ITKBufferConvertion:BOOL=ON ^
+	-DModule_ITKReview:BOOL=ON ^
     -DITK_WRAP_DIMS:STRING=2;3;4 ^
+	-DITK_WRAP_complex_double:BOOL=OFF ^
+	-DITK_WRAP_complex_float:BOOL=OFF ^
+	-DITK_WRAP_covariant_vector_double:BOOL=OFF ^
+	-DITK_WRAP_covariant_vector_float:BOOL=ON ^
+	-DITK_WRAP_double:BOOL=OFF ^
+	-DITK_WRAP_float:BOOL=ON ^
+	-DITK_WRAP_rgb_unsigned_char:BOOL=OFF ^
+	-DITK_WRAP_rgb_unsigned_short:BOOL=OFF ^
+	-DITK_WRAP_rgba_unsigned_char:BOOL=OFF ^
+	-DITK_WRAP_rgba_unsigned_short:BOOL=OFF ^
+	-DITK_WRAP_signed_char:BOOL=OFF ^
+	-DITK_WRAP_signed_long:BOOL=OFF ^
+	-DITK_WRAP_signed_short:BOOL=ON ^
 	-DITK_WRAP_unsigned_char:BOOL=ON ^
 	-DITK_WRAP_unsigned_long:BOOL=ON ^
-	-DITK_WRAP_rgb_unsigned_char:BOOL=OFF ^
-	-DITK_WRAP_rgba_unsigned_char:BOOL=OFF ^
+	-DITK_WRAP_unsigned_short:BOOL=OFF ^
+	-DITK_WRAP_vector_double:BOOL=OFF ^
+	-DITK_WRAP_vector_float:BOOL=ON ^
 	-DINSTALL_WRAP_ITK_COMPATIBILITY:BOOL=OFF ^
     -DVISUAL_STUDIO_PATH:STRING="%VCINSTALLDIR%" ^
     -DCMAKE_INSTALL_PREFIX="%LIBRARY_PREFIX%" ^
@@ -26,8 +50,7 @@ cmake ^
 
 rem Configure and install
 cmake --build . --config Release
-cmake --build . --ttarget install --config Release
-
+cmake --build . --target install --config Release
 
 rem Copy built files to the itk folder
 mkdir %SP_DIR%\itk
