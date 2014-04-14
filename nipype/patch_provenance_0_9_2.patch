@@ -1,0 +1,47 @@
+diff --git a/nipype/utils/provenance.py b/nipype/utils/provenance.py
+index 7cc3585..d9afcb3 100644
+--- nipype/utils/provenance.py
++++ nipype/utils/provenance.py
+@@ -1,7 +1,7 @@
+ from cPickle import dumps
+ import json
+ import os
+-import pwd
++import getpass
+ from socket import getfqdn
+ from uuid import uuid1
+ 
+@@ -181,12 +181,12 @@ def safe_encode(x, as_literal=True):
+             return value
+         return pm.Literal(value, pm.XSD['string'])
+ 
+-
+-def prov_encode(graph, value, create_container=True):
+-    if isinstance(value, list) and create_container:
+-        if len(value) > 1:
+-            try:
+-                entities = []
++
++def prov_encode(graph, value, create_container=True):
++    if isinstance(value, list) and create_container:
++        if len(value) > 1:
++            try:
++                entities = []
+                 for item in value:
+                     item_entity = prov_encode(graph, item)
+                     entities.append(item_entity)
+@@ -354,9 +354,9 @@ class ProvStore(object):
+ 
+         # create agents
+         user_attr = {pm.PROV["type"]: pm.PROV["Person"],
+-                     pm.PROV["label"]: pwd.getpwuid(os.geteuid()).pw_name,
++                     pm.PROV["label"]: getpass.getuser(),
+                      foaf["name"]:
+-                         safe_encode(pwd.getpwuid(os.geteuid()).pw_name)}
++                         safe_encode(getpass.getuser())}
+         user_agent = self.g.agent(get_attr_id(user_attr), user_attr)
+         agent_attr = {pm.PROV["type"]: pm.PROV["SoftwareAgent"],
+                       pm.PROV["label"]: "Nipype",
+-- 
+1.8.0.msysgit.0
+

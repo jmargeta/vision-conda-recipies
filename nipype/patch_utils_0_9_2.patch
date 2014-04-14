@@ -1,0 +1,10 @@
+--- nipype/pipeline/utils.py
++++ nipype/pipeline/utils.py
+@@ -7,7 +7,6 @@
+ from glob import glob
+ from collections import defaultdict
+ import os
+-import pwd
+ import re
+ from uuid import uuid1
+ 
