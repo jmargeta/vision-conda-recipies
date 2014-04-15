@@ -1,0 +1,70 @@
+package:
+  name: dipy
+  version: 0.7.1
+
+source:
+  git_url: https://github.com/nipy/dipy.git
+  git_tag: 0.7.1
+
+  patches:
+   # List any patch files here
+
+build:
+
+  # If this is a new build for the same version, increment the build
+  # number. If you do not include this key, it defaults to 0.
+  #number: 1
+
+requirements:
+  build:
+    - python
+    - setuptools
+    - cython
+    - nibabel
+    - scipy
+
+  run:
+    - python
+    - nibabel
+    - scipy
+
+test:
+  # Python imports
+  imports:
+    - dipy
+    - dipy.align
+    - dipy.core
+    - dipy.tracking
+    - dipy.reconst
+    - dipy.reconst.benchmarks
+    - dipy.io
+    - dipy.viz
+    - dipy.testing
+    - dipy.boots
+    - dipy.data
+    - dipy.utils
+    - dipy.fixes
+    - dipy.external
+    - dipy.segment
+    - dipy.sims
+    #- dipy.denoise
+
+  # commands:
+    # You can put test commands to be run here.  Use this to test that the
+    # entry points work.
+
+
+  # You can also put a file called run_test.py in the recipe that will be run
+  # at test time.
+
+  # requires:
+    # Put any additional test requirements here.  For example
+    # - nose
+
+about:
+  home: http://nipy.org/dipy/
+  license: BSD License
+
+# See
+# http://docs.continuum.io/conda/build.html for
+# more information about meta.yaml
