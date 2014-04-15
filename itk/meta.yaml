@@ -1,10 +1,10 @@
 package:
   name: itk
-  version: 4.5.1
+  version: 4.5.2
 
 source:
   git_url: git://itk.org/ITK.git
-  git_tag: v4.5.1
+  git_tag: v4.5.2
 
 build:
   # If this is a new build for the same version, increment the build
